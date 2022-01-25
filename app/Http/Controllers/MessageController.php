@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\MessageDelivered;
 use App\Models\Message;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 
+
 class MessageController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        return view('messages.index');
+        $messages = Message::all();
+        return view('messages.index', compact('messages'));
     }
 
     /**
@@ -32,11 +40,14 @@ class MessageController extends Controller
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return array
      */
     public function store(Request $request)
     {
-        //
+        $message = auth()->user()->messages()->create($request->all());
+        broadcast(new MessageDelivered($message->load('user')))->toOthers();
+
+        return $message;
     }
 
     /**

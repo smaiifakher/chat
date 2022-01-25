@@ -1,5 +1,5 @@
 {
-    "authHost": "http://localhost:3000/chat/public/",
+    "authHost": "http://localhost/chat/public/",
     "authEndpoint": "/broadcasting/auth",
     "clients": [
         {

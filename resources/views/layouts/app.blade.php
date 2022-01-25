@@ -6,10 +6,14 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- User-id -->
+    <meta name="user-id" content="{{ auth()->user()->id ?? '' }}">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
