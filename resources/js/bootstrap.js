@@ -1,8 +1,10 @@
 window._ = require('lodash');
 
+
 try {
     require('bootstrap');
-} catch (e) {}
+} catch (e) {
+}
 
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -30,3 +32,39 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+import Echo from "laravel-echo"
+
+window.io = require('socket.io-client');
+
+window.Echo = new Echo({
+    broadcaster: 'socket.io',
+    host: process.env.APP_URL + ':6001'
+})
+
+
+let onlineUsersLength = 0;
+let userId = $('meta[name=user-id]').attr('content');
+console.log(userId)
+window.Echo.channel(`chat-group`)
+    .listen('MessageDelivered', (e) => {
+        console.log(e.message);
+    });
+
+window.Echo.join('online')
+    .here((users) => {
+        console.log(users);
+        onlineUsersLength = users.length;
+        users.forEach(function (user) {
+            if (user.id === userId) return;
+
+            $('#online-users').append(`<li id="${user.id}" class="list-group-item">${user.name}</li>`);
+        })
+    })
+    .joining((user) => {
+        console.log(user);
+        $('#online-users').append(`<li id="${user.id}" class="list-group-item">${user.name}</li>`);
+    })
+    .leaving((user) => {
+        console.log(user);
+        $(`#user-${user.id}`).remove();
+    }).error((errors) => console.log(errors));

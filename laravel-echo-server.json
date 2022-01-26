@@ -1,37 +1,32 @@
 {
-    "authHost": "http://localhost/chat/public/",
-    "authEndpoint": "/broadcasting/auth",
-    "clients": [
-        {
-            "appId": "5b9f457078ece1c3",
-            "key": "79a5c6fab5a82008ae06b61d310d5294"
-        }
-    ],
-    "database": "redis",
-    "databaseConfig": {
-        "redis": {},
-        "sqlite": {
-            "databasePath": "/database/laravel-echo-server.sqlite"
-        }
-    },
-    "devMode": true,
-    "host": null,
-    "port": "6001",
-    "protocol": "http",
-    "socketio": {},
-    "secureOptions": 67108864,
-    "sslCertPath": "",
-    "sslKeyPath": "",
-    "sslCertChainPath": "",
-    "sslPassphrase": "",
-    "subscribers": {
-        "http": true,
-        "redis": true
-    },
-    "apiOriginAllow": {
-        "allowCors": false,
-        "allowOrigin": "",
-        "allowMethods": "",
-        "allowHeaders": ""
-    }
+	"authHost": "http://localhost/chat/public",
+	"authEndpoint": "/broadcasting/auth",
+	"clients": [],
+	"database": "redis",
+	"databaseConfig": {
+		"redis": {},
+		"sqlite": {
+			"databasePath": "/database/laravel-echo-server.sqlite"
+		}
+	},
+	"devMode": true,
+	"host": null,
+	"port": "6001",
+	"protocol": "http",
+	"socketio": {},
+	"secureOptions": 67108864,
+	"sslCertPath": "",
+	"sslKeyPath": "",
+	"sslCertChainPath": "",
+	"sslPassphrase": "",
+	"subscribers": {
+		"http": true,
+		"redis": true
+	},
+	"apiOriginAllow": {
+		"allowCors": false,
+		"allowOrigin": "",
+		"allowMethods": "",
+		"allowHeaders": ""
+	}
 }
